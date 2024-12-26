@@ -1,17 +1,23 @@
 # Facial Liveness Detection App
 
-This application demonstrates a sophisticated facial liveness detection system using a Python backend and a React-based frontend (powered by Vite). The backend performs advanced liveness detection using ONNX models, and the frontend allows users to upload images for liveness analysis.
+This application demonstrates a sophisticated facial liveness detection system using a Python backend and a React-based frontend (powered by Vite). The backend performs advanced liveness detection using DeepFace library, and the frontend allows users to upload images for liveness analysis.
 
 ## Table of Contents
 
-1. [Features](#features)
-2. [Prerequisites](#prerequisites)
-3. [Setup Instructions](#setup-instructions)
-    - [Backend](#backend)
-    - [Frontend](#frontend)
-4. [Running the Application](#running-the-application)
-5. [How the App Works](#how-the-app-works)
-6. [Acknowledgements](#acknowledgements)
+- [Facial Liveness Detection App](#facial-liveness-detection-app)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Prerequisites](#prerequisites)
+  - [Setup Instructions](#setup-instructions)
+    - [1. Backend](#1-backend)
+      - [Steps to Set Up:](#steps-to-set-up)
+      - [Backend File Structure:](#backend-file-structure)
+    - [2. Frontend](#2-frontend)
+      - [Steps to Set Up:](#steps-to-set-up-1)
+      - [Frontend File Structure:](#frontend-file-structure)
+  - [Running the Application](#running-the-application)
+  - [How the App Works](#how-the-app-works)
+  - [Acknowledgements](#acknowledgements)
 
 ---
 
@@ -26,7 +32,7 @@ This application demonstrates a sophisticated facial liveness detection system u
 ## Prerequisites
 
 1. **System Requirements**:
-   - A machine with Python 3.11+ installed.
+   - A machine with Python 3.7<=3.11 installed.
    - Node.js 19+ and npm.
 
 2. **Libraries and Tools**:
@@ -57,16 +63,10 @@ This application demonstrates a sophisticated facial liveness detection system u
 
 3. **Install Dependencies**:
    ```bash
-   pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cpu
    pip3 install -r requirements.txt
    ```
 
-4. **Download the ONNX Model**:
-   - Place the ONNX model (`liveness_model.onnx`) in the `models/` directory.
-   - Ensure the path in the backend script points to this file.
-   - A default model has been uploaded in this repository.
-
-5. **Run the Backend**:
+4. **Run the Backend**:
    ```bash
    uvicorn main:app --reload
    ```
@@ -146,9 +146,7 @@ frontend/
 
 2. **Backend Processing**:
    - The backend receives the image.
-   - It preprocesses the image and passes it to the ONNX model for liveness detection.
-   - The model outputs a matrix of predictions.
-   - The backend applies post-processing to classify the input as "live" or "spoof".
+   - The backend uses DeepFace library to get anti-spoofing score and classifies image as "live" or "spoof".
 
 3. **Result Display**:
    - The result is sent back to the frontend.
@@ -160,5 +158,5 @@ frontend/
 
 - [React Documentation](https://reactjs.org/docs/getting-started.html)
 - [Flask Documentation](https://flask.palletsprojects.com/)
-- [ONNX Runtime Documentation](https://onnxruntime.ai/docs/)
+- [DeepFace Documentation](https://onnxruntime.ai/docs/)
 

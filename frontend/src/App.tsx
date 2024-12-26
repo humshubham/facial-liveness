@@ -60,19 +60,21 @@ const App = () => {
 
             // Handle response
             if (response.data.is_live) {
-              setMessage("Liveness confirmed: Live person detected!");
+              setMessage(response.data.message);
               setLivenessChecked(true);
               clearInterval(interval);
             } else {
-              setMessage("No liveness detected. Keep trying...");
+              setMessage(response.data.message);
             }
           } catch (error) {
-            setMessage("Error during detection. Check the console for details.");
+            setMessage(
+              "Error during detection. Check the console for details."
+            );
             console.error("Error detecting liveness:", error);
           }
         }
       }
-    }, 1000); // Capture every second
+    }, 3000); // Capture every second
   };
 
   return (
@@ -84,7 +86,10 @@ const App = () => {
       />
       <p>{message}</p>
       {!isLivenessChecked && (
-        <button onClick={startVideo} style={{ padding: "10px 20px", fontSize: "16px" }}>
+        <button
+          onClick={startVideo}
+          style={{ padding: "10px 20px", fontSize: "16px" }}
+        >
           Start Liveness Detection
         </button>
       )}
